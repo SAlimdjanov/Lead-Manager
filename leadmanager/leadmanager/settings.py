@@ -6,6 +6,8 @@ Django 4.2.7.
 
 """
 
+from datetime import timedelta
+
 from pathlib import Path
 from decouple import config
 
@@ -29,6 +31,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "frontend",
+    "users",
     "leads",
 ]
 
@@ -108,3 +111,21 @@ STATIC_URL = "static/"
 # Default primary key field type
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# REST Framework settings
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework_simplejwt.authentication.JWTAuthentication"
+    ]
+}
+
+# JWT Settings
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
+}
+
+# Authenticated user model
+
+AUTH_USER_MODEL = "users.UserAccount"

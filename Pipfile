@@ -9,6 +9,7 @@ djangorestframework = "*"
 django-rest-knox = "*"
 mysqlclient = "==2.0.1"
 python-decouple = "*"
+djangorestframework-simplejwt = "*"
 
 [dev-packages]
 
