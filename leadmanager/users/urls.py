@@ -10,6 +10,6 @@ from .views import RegisterView, RetrieveUserView
 
 
 urlpatterns = [
-    path("register", RegisterView.as_view(), name="register_view"),
-    path("me", RetrieveUserView.as_view(), name="retrieve_user_view"),
+    path("api/users/register", RegisterView.as_view(), name="register_view"),
+    path("api/users/me", RetrieveUserView.as_view(), name="retrieve_user_view"),
 ]
