@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Layout from "../layout/Layout";
 import { Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Form, Button, Spinner } from "react-bootstrap";
+import { Form, Button, Spinner, Container } from "react-bootstrap";
 
 import { register } from "../../features/auth";
 
@@ -32,11 +32,21 @@ export default function Register() {
     }
 
     return (
-        <Layout title="Lead Manager: Register" content="Lead Manager registration page">
-            <h1>Register for a Lead Manager Account</h1>
+        <Layout
+            title="LeadFlow Pro: Register"
+            content="LeadFlow Pro registration page"
+            header="Register for a LeadFlow Account"
+        >
+            <Container className="pl-5 pr-5 text-center">
+                <p>
+                    Welcome to LeadFlow Pro. Have an account? Sign in <a href="/login">here</a>.
+                </p>
+            </Container>
             <Form onSubmit={onFormSubmit}>
                 <Form.Group className="mt-3" controlId="formFirstName">
-                    <Form.Label>First Name</Form.Label>
+                    <Form.Label>
+                        <b>First Name</b>
+                    </Form.Label>
                     <Form.Control
                         type="text"
                         placeholder="Bob"
@@ -48,7 +58,9 @@ export default function Register() {
                     />
                 </Form.Group>
                 <Form.Group className="mt-3" controlId="formLastName">
-                    <Form.Label>Last Name</Form.Label>
+                    <Form.Label>
+                        <b>Last Name</b>
+                    </Form.Label>
                     <Form.Control
                         type="text"
                         placeholder="Example"
@@ -60,7 +72,9 @@ export default function Register() {
                     />
                 </Form.Group>
                 <Form.Group className="mt-3" controlId="formEmail">
-                    <Form.Label>Email</Form.Label>
+                    <Form.Label>
+                        <b>Email</b>
+                    </Form.Label>
                     <Form.Control
                         type="email"
                         placeholder="bob@example.com"
@@ -72,7 +86,9 @@ export default function Register() {
                     />
                 </Form.Group>
                 <Form.Group className="mt-3" controlId="formPassword">
-                    <Form.Label>Password</Form.Label>
+                    <Form.Label>
+                        <b>Password</b>
+                    </Form.Label>
                     <Form.Control
                         type="password"
                         onChange={onFieldChange}

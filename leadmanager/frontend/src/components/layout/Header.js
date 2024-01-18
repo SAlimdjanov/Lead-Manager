@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import { Navbar, Nav } from "react-bootstrap";
+import { Navbar, Nav, Container } from "react-bootstrap";
 import { useSelector } from "react-redux";
+
+import brandIcon from "../../assets/icon-briefcase.png";
 
 export default function Header() {
     const { isAuthenticated } = useSelector((state) => state.user);
@@ -21,19 +23,23 @@ export default function Header() {
     );
 
     return (
-        <Navbar
-            bg="body-secondary"
-            expand="sm"
-            fixed="top"
-            style={{ paddingLeft: "15px", paddingRight: "15px" }}
-        >
-            <Navbar.Brand className="" href="/">
-                Lead Manager
-            </Navbar.Brand>
-            <Navbar.Toggle aria-controls="navbarSupportedContent" />
-            <Navbar.Collapse id="navbarSupportedContent">
-                <Nav className="me-auto">{isAuthenticated ? authLinks : guestLinks}</Nav>
-            </Navbar.Collapse>
+        <Navbar bg="body-secondary" expand="sm">
+            <Container>
+                <Navbar.Brand href="/">
+                    <img
+                        alt="logo"
+                        src={brandIcon}
+                        width="30"
+                        height="30"
+                        className="d-inline-block align-top"
+                    />{" "}
+                    LeadFlow Pro
+                </Navbar.Brand>
+                <Navbar.Toggle aria-controls="navbarSupportedContent" />
+                <Navbar.Collapse id="navbarSupportedContent">
+                    <Nav className="me-auto">{isAuthenticated ? authLinks : guestLinks}</Nav>
+                </Navbar.Collapse>
+            </Container>
         </Navbar>
     );
 }

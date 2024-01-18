@@ -14,7 +14,7 @@ import Header from "./Header";
  * @param {Object} params Object containing page title, content metadata, and child components
  * @returns {JSX.Element}
  */
-export default function Layout({ title, content, children }) {
+export default function Layout({ title, content, header, children }) {
     return (
         <>
             <Helmet>
@@ -22,7 +22,10 @@ export default function Layout({ title, content, children }) {
                 <meta name="description" content={content} />
             </Helmet>
             <Header />
-            <Container className="mt-5 pt-3">{children}</Container>
+            <Container>
+                <h1 className="text-primary text-center mt-4 mb-3">{header}</h1>
+                {children}
+            </Container>
         </>
     );
 }

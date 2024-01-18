@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 export class Leads extends Component {
     render() {
-        return <h1>View Leads</h1>;
+        return <h2>View Leads</h2>;
     }
 }
 
