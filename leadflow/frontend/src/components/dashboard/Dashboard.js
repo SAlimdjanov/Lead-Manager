@@ -6,7 +6,7 @@ import Form from "./Form";
 
 function Dashboard() {
     return (
-        <Layout title="LeadFlow Pro: Dashboard" content="LeadFlow Pro dashboard" header="Dashboard">
+        <Layout title="LeadFlow: Dashboard" content="LeadFlow dashboard" header="Dashboard">
             <Form />
             <Leads />
         </Layout>

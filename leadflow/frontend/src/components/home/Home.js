@@ -9,14 +9,14 @@ export default function Home() {
     const isLoggedIn = false;
 
     return isLoggedIn ? (
-        <Layout title="LeadFlow Pro: Home" content="LeadFlow Pro home page" header="Welcome Back">
+        <Layout title="LeadFlow: Home" content="LeadFlow home page" header="Welcome Back">
             <MemberHome />
         </Layout>
     ) : (
         <Layout
-            title="LeadFlow Pro"
-            content="LeadFlow Pro home page"
-            header="Elevate Your Lead Management with LeadFlow Pro"
+            title="LeadFlow"
+            content="LeadFlow home page"
+            header="Elevate Your Lead Management with LeadFlow"
         >
             <VisitorHome />
         </Layout>

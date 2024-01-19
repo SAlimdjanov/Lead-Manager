@@ -11,10 +11,10 @@ module.exports = (argv) => {
 
     return {
         mode: argv.mode || "development",
-        entry: "./leadmanager/frontend/src/index.js",
+        entry: "./leadflow/frontend/src/index.js",
         output: {
             filename: "main.js",
-            path: path.resolve("leadmanager/frontend/static/frontend"),
+            path: path.resolve("leadflow/frontend/static/frontend"),
         },
         devtool: isDevMode ? "eval-source-map" : "source-map",
         optimization: {

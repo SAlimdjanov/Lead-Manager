@@ -12,7 +12,7 @@ import sys
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "leadmanager.settings")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "leadflow.settings")
     try:
         from django.core.management import (  # pylint: disable=import-outside-toplevel
             execute_from_command_line,

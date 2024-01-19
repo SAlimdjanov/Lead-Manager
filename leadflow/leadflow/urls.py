@@ -1,7 +1,7 @@
 """
 urls.py
 
-URL configuration for leadmanager project.
+URL configuration for leadflow project.
 
 """
 

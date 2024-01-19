@@ -33,7 +33,7 @@ export default function Header() {
                         height="30"
                         className="d-inline-block align-top"
                     />{" "}
-                    LeadFlow Pro
+                    LeadFlow
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarSupportedContent" />
                 <Navbar.Collapse id="navbarSupportedContent">

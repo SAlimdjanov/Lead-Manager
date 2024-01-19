@@ -30,10 +30,10 @@ export default function Login() {
     };
 
     return (
-        <Layout title="LeadFlow Pro: Login" content="LeadFlow Pro login page" header="Login">
+        <Layout title="LeadFlow: Login" content="LeadFlow login page" header="Login">
             <Container className="pl-5 pr-5 text-center">
                 <p>
-                    Welcome back to LeadFlow Pro. Don't have an account? Register{" "}
+                    Welcome back to LeadFlow. Don't have an account? Register{" "}
                     <a href="/register">here</a>.
                 </p>
             </Container>

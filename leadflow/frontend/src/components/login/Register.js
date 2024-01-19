@@ -33,13 +33,13 @@ export default function Register() {
 
     return (
         <Layout
-            title="LeadFlow Pro: Register"
-            content="LeadFlow Pro registration page"
+            title="LeadFlow: Register"
+            content="LeadFlow registration page"
             header="Register for a LeadFlow Account"
         >
             <Container className="pl-5 pr-5 text-center">
                 <p>
-                    Welcome to LeadFlow Pro. Have an account? Sign in <a href="/login">here</a>.
+                    Welcome to LeadFlow. Have an account? Sign in <a href="/login">here</a>.
                 </p>
             </Container>
             <Form onSubmit={onFormSubmit}>
