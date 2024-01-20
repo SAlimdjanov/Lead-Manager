@@ -20,7 +20,6 @@ class UserAccountManager(BaseUserManager):
         """Create a user with custom fields"""
         if not email:
             raise ValueError("You must provide an email address")
-        # Fix erroneous capital letters in email address
         email = self.normalize_email(email).lower()
         user = self.model(
             first_name=first_name,

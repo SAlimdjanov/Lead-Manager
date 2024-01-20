@@ -1,28 +1,27 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Form, Button, Spinner, Container } from "react-bootstrap";
 
-import { resetRegistered } from "../../features/auth";
+import { resetRegistered, login } from "../../features/auth";
 import Layout from "../layout/Layout";
 
 export default function Login() {
-    /** @todo Bring redux state over. This is a temporary flag */
-    const loading = false;
-
+    const { loading } = useSelector((state) => state.user);
     const dispatch = useDispatch();
     const [formData, setFormData] = useState({
         email: "",
         password: "",
     });
 
-    const { email, password } = formData;
-
     useEffect(() => {
         dispatch(resetRegistered());
     }, []);
 
+    const { email, password } = formData;
+
     const onFormSubmit = (event) => {
         event.preventDefault();
+        dispatch(login({ email, password }));
     };
 
     const onFieldChange = (event) => {
@@ -37,43 +36,44 @@ export default function Login() {
                     <a href="/register">here</a>.
                 </p>
             </Container>
-            <Form onSubmit={onFormSubmit}>
-                <Form.Group className="mt-3" controlId="formEmail">
-                    <Form.Label>
-                        <b>Email</b>
-                    </Form.Label>
-                    <Form.Control
-                        type="email"
-                        placeholder="bob@example.com"
-                        onChange={onFieldChange}
-                        name="email"
-                        value={email}
-                        autoComplete="email"
-                        required
-                    />
-                </Form.Group>
-                <Form.Group className="mt-3" controlId="formPassword">
-                    <Form.Label>
-                        <b>Password</b>
-                    </Form.Label>
-                    <Form.Control
-                        type="password"
-                        onChange={onFieldChange}
-                        name="password"
-                        value={password}
-                        required
-                    />
-                </Form.Group>
-                {loading ? (
-                    <Spinner>
-                        <span className="visually-hidden">Loading...</span>
-                    </Spinner>
-                ) : (
-                    <Button className="mt-3" type="submit">
-                        Login
-                    </Button>
-                )}
-            </Form>
+            <Container>
+                <Form onSubmit={onFormSubmit}>
+                    <Form.Group className="mt-3" controlId="formEmail">
+                        <Form.Label>
+                            <b>Email</b>
+                        </Form.Label>
+                        <Form.Control
+                            type="email"
+                            onChange={onFieldChange}
+                            name="email"
+                            value={email}
+                            autoComplete="email"
+                            required
+                        />
+                    </Form.Group>
+                    <Form.Group className="mt-3" controlId="formPassword">
+                        <Form.Label>
+                            <b>Password</b>
+                        </Form.Label>
+                        <Form.Control
+                            type="password"
+                            onChange={onFieldChange}
+                            name="password"
+                            value={password}
+                            required
+                        />
+                    </Form.Group>
+                    {loading ? (
+                        <Spinner>
+                            <span className="visually-hidden">Loading...</span>
+                        </Spinner>
+                    ) : (
+                        <Button className="mt-3" type="submit">
+                            Login
+                        </Button>
+                    )}
+                </Form>
+            </Container>
         </Layout>
     );
 }

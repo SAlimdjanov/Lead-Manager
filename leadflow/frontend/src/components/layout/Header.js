@@ -1,17 +1,20 @@
-import React, { Component } from "react";
+import React from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../../features/auth";
 
 import brandIcon from "../../assets/icon-briefcase.png";
 
 export default function Header() {
+    const dispatch = useDispatch();
     const { isAuthenticated } = useSelector((state) => state.user);
 
     const authLinks = (
         <>
             <Nav.Link href="dashboard">Dashboard</Nav.Link>
-            {/** @todo Implement logout feature */}
-            <Nav.Link href="!#">Logout</Nav.Link>
+            <Nav.Link href="/" onClick={() => dispatch(logout())}>
+                Logout
+            </Nav.Link>
         </>
     );
 

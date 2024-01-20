@@ -12,9 +12,10 @@ async function registerAccount(data) {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(data),
+        }).then((res) => {
+            return res;
         });
-        const responseData = await response.json();
-        return responseData;
+        return response.status;
     } catch (error) {
         console.error("Error:", error + ". Something went wrong during account registration");
         throw error;
