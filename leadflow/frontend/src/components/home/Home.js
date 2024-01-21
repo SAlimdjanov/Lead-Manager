@@ -1,14 +1,14 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 import Layout from "../layout/Layout";
 import VisitorHome from "./VisitorHome";
 import MemberHome from "./MemberHome";
 
 export default function Home() {
-    /** @todo Bring authentication state in. This is a temporaray flag */
-    const isLoggedIn = false;
+    const { isAuthenticated } = useSelector((state) => state.user);
 
-    return isLoggedIn ? (
+    return isAuthenticated ? (
         <Layout title="LeadFlow: Home" content="LeadFlow home page" header="Welcome Back">
             <MemberHome />
         </Layout>

@@ -3,16 +3,23 @@ import { Navbar, Nav, Container } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../features/auth";
 
+import Cookies from "js-cookie";
 import brandIcon from "../../assets/icon-briefcase.png";
 
 export default function Header() {
     const dispatch = useDispatch();
     const { isAuthenticated } = useSelector((state) => state.user);
 
+    const handleLogout = () => {
+        Cookies.remove("access");
+        Cookies.remove("refresh");
+        dispatch(logout());
+    };
+
     const authLinks = (
         <>
             <Nav.Link href="dashboard">Dashboard</Nav.Link>
-            <Nav.Link href="/" onClick={() => dispatch(logout())}>
+            <Nav.Link href="/" onClick={handleLogout}>
                 Logout
             </Nav.Link>
         </>

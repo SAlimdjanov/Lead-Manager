@@ -4,7 +4,10 @@
  * users/me route handler
  */
 
-async function obtainUserInfo(accessToken) {
+import Cookies from "js-cookie";
+
+async function obtainUserInfo() {
+    const accessToken = Cookies.get(["access"]);
     try {
         const response = await fetch("/api/users/me", {
             method: "GET",

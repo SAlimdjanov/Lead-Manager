@@ -5,6 +5,8 @@
  */
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import Cookies from "js-cookie";
+
 import registerAccount from "../../routes/auth/register";
 import loginToAccount from "../../routes/auth/login";
 import obtainUserInfo from "../../routes/auth/me";
@@ -22,9 +24,9 @@ export const register = createAsyncThunk("user/registerAccount", async (requestD
     }
 });
 
-const getUserInfo = createAsyncThunk("user/getUserInfo", async (accessToken, thunkAPI) => {
+const getUserInfo = createAsyncThunk("user/getUserInfo", async () => {
     try {
-        const userInfo = await obtainUserInfo(accessToken);
+        const userInfo = await obtainUserInfo();
         if (userInfo.response.status !== 200) {
             throw new Error(`${userInfo.response.status}: Bad user data request`);
         }
@@ -40,7 +42,11 @@ export const login = createAsyncThunk("user/loginToAccount", async (requestData,
         const credentials = await loginToAccount(requestData);
         if (credentials.response.status === 200) {
             const { dispatch } = thunkAPI;
-            dispatch(getUserInfo(credentials.data.access));
+            // Expires 1 / 48 days = 30 min
+            Cookies.set("access", credentials.data.access, { path: "/", expires: 1 / 48 });
+            // Expires in 1 day
+            Cookies.set("refresh", credentials.data.refresh, { path: "/", expires: 1 });
+            dispatch(getUserInfo());
         } else {
             throw new Error(`${credentials.response.status}: Bad login request`);
         }
@@ -110,6 +116,17 @@ const userSlice = createSlice({
                 state.user = action.payload;
             })
             .addCase(getUserInfo.rejected, (state) => {
+                state.loading = false;
+            })
+            .addCase(logout.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(logout.fulfilled, (state) => {
+                state.loading = false;
+                state.isAuthenticated = false;
+                state.user = null;
+            })
+            .addCase(logout.rejected, (state) => {
                 state.loading = false;
             });
     },

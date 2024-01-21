@@ -16,6 +16,7 @@ async function loginToAccount(data) {
             return res;
         });
         const tokenData = await tokenResponse.json();
+
         return { response: tokenResponse, data: tokenData };
     } catch (error) {
         console.error("Error:", error + ". Something went wrong during login");
