@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Form, Button, Spinner, Container } from "react-bootstrap";
+import { Navigate } from "react-router-dom";
 
 import { resetRegistered, login } from "../../features/auth";
 import Layout from "../layout/Layout";
 
 export default function Login() {
-    const { loading } = useSelector((state) => state.user);
+    const { loading, isAuthenticated, registered } = useSelector((state) => state.user);
     const dispatch = useDispatch();
     const [formData, setFormData] = useState({
         email: "",
@@ -14,8 +15,10 @@ export default function Login() {
     });
 
     useEffect(() => {
-        dispatch(resetRegistered());
-    }, []);
+        if (registered) {
+            dispatch(resetRegistered());
+        }
+    }, [registered]);
 
     const { email, password } = formData;
 
@@ -27,6 +30,10 @@ export default function Login() {
     const onFieldChange = (event) => {
         setFormData({ ...formData, [event.target.name]: event.target.value });
     };
+
+    if (isAuthenticated && !loading) {
+        return <Navigate to="/dashboard" />;
+    }
 
     return (
         <Layout title="LeadFlow: Login" content="LeadFlow login page" header="Login">

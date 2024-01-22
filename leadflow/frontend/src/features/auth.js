@@ -10,6 +10,7 @@ import Cookies from "js-cookie";
 import registerAccount from "../../routes/auth/register";
 import loginToAccount from "../../routes/auth/login";
 import obtainUserInfo from "../../routes/auth/me";
+import verifyUser from "../../routes/auth/verify";
 
 export const register = createAsyncThunk("user/registerAccount", async (requestData) => {
     try {
@@ -53,6 +54,22 @@ export const login = createAsyncThunk("user/loginToAccount", async (requestData,
         return credentials.data;
     } catch (error) {
         console.error(error, ": Error during account login.");
+        throw error;
+    }
+});
+
+export const checkAuthentication = createAsyncThunk("user/verify", async (_, thunkAPI) => {
+    try {
+        const response = await verifyUser();
+        if (response === 200) {
+            const { dispatch } = thunkAPI;
+            dispatch(getUserInfo());
+        } else {
+            return thunkAPI.rejectWithValue({ status: response });
+        }
+        return response;
+    } catch (error) {
+        console.error(error, ": Error during verification.");
         throw error;
     }
 });
@@ -117,6 +134,17 @@ const userSlice = createSlice({
             })
             .addCase(getUserInfo.rejected, (state) => {
                 state.loading = false;
+            })
+            .addCase(checkAuthentication.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(checkAuthentication.fulfilled, (state) => {
+                state.loading = false;
+                state.isAuthenticated = true;
+            })
+            .addCase(checkAuthentication.rejected, (state) => {
+                state.loading = false;
+                state.isAuthenticated = false;
             })
             .addCase(logout.pending, (state) => {
                 state.loading = true;

@@ -8,7 +8,7 @@ import MemberHome from "./MemberHome";
 export default function Home() {
     const { isAuthenticated } = useSelector((state) => state.user);
 
-    return isAuthenticated ? (
+    const content = isAuthenticated ? (
         <Layout title="LeadFlow: Home" content="LeadFlow home page" header="Welcome Back">
             <MemberHome />
         </Layout>
@@ -21,4 +21,6 @@ export default function Home() {
             <VisitorHome />
         </Layout>
     );
+
+    return content;
 }

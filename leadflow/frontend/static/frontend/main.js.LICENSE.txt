@@ -44,6 +44,8 @@ object-assign
 
 /*! ../../routes/auth/register */
 
+/*! ../../routes/auth/verify */
+
 /*! ../features/auth */
 
 /*! ../layout/Layout */
@@ -539,6 +541,10 @@ object-assign
 /*!************************************************!*\
   !*** ./node_modules/react-helmet/es/Helmet.js ***!
   \************************************************/
+
+/*!*************************************************!*\
+  !*** ./leadflow/frontend/routes/auth/verify.js ***!
+  \*************************************************/
 
 /*!*************************************************!*\
   !*** ./leadflow/frontend/src/components/App.js ***!
