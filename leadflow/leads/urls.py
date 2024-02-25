@@ -6,14 +6,12 @@ URL configurations for leads app, using Django REST Framework's default router
 """
 
 from django.urls import path, include
-
 from rest_framework import routers
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
     TokenVerifyView,
 )
-
 from .api import LeadViewSet
 
 

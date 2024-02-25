@@ -1,3 +1,9 @@
+/**
+ * Home.js
+ *
+ * Application home page. Renders the appropriate view based on user authentication state
+ */
+
 import React from "react";
 import { useSelector } from "react-redux";
 

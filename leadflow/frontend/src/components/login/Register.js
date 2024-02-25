@@ -1,3 +1,9 @@
+/**
+ * Login.js
+ *
+ * Application Login page
+ */
+
 import React, { useState } from "react";
 import Layout from "../layout/Layout";
 import { Navigate } from "react-router-dom";

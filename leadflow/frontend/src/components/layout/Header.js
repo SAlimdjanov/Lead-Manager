@@ -1,3 +1,9 @@
+/**
+ * Header.js
+ *
+ * Handles navbar and its state-related actions
+ */
+
 import React from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";

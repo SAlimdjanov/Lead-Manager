@@ -6,6 +6,11 @@
 
 import Cookies from "js-cookie";
 
+/**
+ * Sends a POST request to the API to validate an access token
+ *
+ * @returns {Number} HTTP response status code
+ */
 async function verifyUser() {
     const accessToken = Cookies.get(["access"]);
     try {

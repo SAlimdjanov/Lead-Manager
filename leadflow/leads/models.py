@@ -19,5 +19,4 @@ class Lead(models.Model):
     message = models.CharField(max_length=500, blank=True)
     # Capture the time of record creation
     time_created = models.DateTimeField(auto_now_add=True)
-
     objects = models.Manager()

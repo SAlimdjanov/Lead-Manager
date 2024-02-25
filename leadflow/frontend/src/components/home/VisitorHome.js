@@ -1,7 +1,9 @@
 /**
  * VistorHome.js
  *
- * Home page view for visiting users
+ * Home page view for visiting (logged out or not authenticated) users
+ *
+ * @TODO Aesthetic improvements
  */
 
 import React from "react";

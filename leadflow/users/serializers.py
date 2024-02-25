@@ -8,10 +8,11 @@ User model serializer
 from django.core import exceptions
 from django.contrib.auth import get_user_model
 from django.contrib.auth.password_validation import validate_password
-
 from rest_framework import serializers
+from .models import UserAccount
 
 
+# Obtain custom user model
 User = get_user_model()
 
 
@@ -24,7 +25,7 @@ class UserCreateSerializer(serializers.ModelSerializer):
         model = User
         fields = ["first_name", "last_name", "email", "password"]
 
-    def validate(self, attrs):
+    def validate(self, attrs: dict) -> dict:
         """Password validation"""
         user = User(**attrs)
         password = attrs.get("password")
@@ -39,7 +40,7 @@ class UserCreateSerializer(serializers.ModelSerializer):
             )
         return attrs
 
-    def create(self, validated_data):
+    def create(self, validated_data: dict) -> UserAccount:
         """Create user with serialized data"""
         user = User.objects.create_user(
             first_name=validated_data["first_name"],

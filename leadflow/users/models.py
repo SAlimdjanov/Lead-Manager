@@ -16,7 +16,9 @@ from django.contrib.auth.models import (
 class UserAccountManager(BaseUserManager):
     """Custom user manager for creating API users"""
 
-    def create_user(self, first_name, last_name, email, password=None):
+    def create_user(
+        self, first_name: str, last_name: str, email: str, password=None
+    ) -> "UserAccount":
         """Create a user with custom fields"""
         if not email:
             raise ValueError("You must provide an email address")
@@ -28,17 +30,16 @@ class UserAccountManager(BaseUserManager):
         )
         user.set_password(password)
         user.save(using=self.db)
-
         return user
 
-    def create_superuser(self, first_name, last_name, email, password=None):
+    def create_superuser(
+        self, first_name: str, last_name: str, email: str, password=None
+    ) -> "UserAccount":
         """Create a superuser with create_user"""
         user = self.create_user(first_name, last_name, email, password)
-
         user.is_staff = True
         user.is_superuser = True
         user.save(using=self.db)
-
         return user
 
 

@@ -6,6 +6,12 @@
 
 import Cookies from "js-cookie";
 
+/**
+ * Makes an API request to view user information based on content stored in browser cookies. If a
+ * user is logged in, the access token stored in browser cookies is used to fetch user information.
+ *
+ * @returns {Object} Object containing the HTTP response status and corresponding response data
+ */
 async function obtainUserInfo() {
     const accessToken = Cookies.get(["access"]);
     try {

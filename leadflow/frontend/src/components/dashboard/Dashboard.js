@@ -1,3 +1,12 @@
+/**
+ * Dashboard.js
+ *
+ * The dashboard component, where users can view their account details, view, modify, and delete
+ * leads.
+ *
+ * @TODO Implementation
+ */
+
 import React from "react";
 import { Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";

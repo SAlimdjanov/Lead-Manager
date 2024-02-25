@@ -1,7 +1,7 @@
 /**
  * auth.js
  *
- * User authentication state initialization
+ * User authentication state management
  */
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
@@ -12,9 +12,17 @@ import loginToAccount from "../../routes/auth/login";
 import obtainUserInfo from "../../routes/auth/me";
 import verifyUser from "../../routes/auth/verify";
 
+/**
+ * Asynchronous thunk action creator for registering a new user account. This function sends a
+ * registration request to the server with the provided data.
+ *
+ * @param {Object} requestData - The data containing registration details
+ * @returns {Promise<number>} A Promise that resolves with the HTTP response status code
+ * @throws {Error} If an error occurs during the registration process or if the request fails
+ */
 export const register = createAsyncThunk("user/registerAccount", async (requestData) => {
     try {
-        const responseStatus = await registerAccount(requestData);
+        const responseStatus = registerAccount(requestData);
         if (responseStatus !== 201) {
             throw new Error(`${responseStatus}: Bad registration request`);
         }
@@ -25,6 +33,13 @@ export const register = createAsyncThunk("user/registerAccount", async (requestD
     }
 });
 
+/**
+ * Asynchronous thunk action creator for retrieving user information. This function sends a request
+ * to obtain user information from the server.
+ *
+ * @returns {Promise<Object>} A Promise that resolves with the user information
+ * @throws {Error} If an error occurs during the user data fetch or if the request fails
+ */
 const getUserInfo = createAsyncThunk("user/getUserInfo", async () => {
     try {
         const userInfo = await obtainUserInfo();
@@ -38,6 +53,16 @@ const getUserInfo = createAsyncThunk("user/getUserInfo", async () => {
     }
 });
 
+/**
+ * Asynchronous thunk action creator for user login. It sends a login request to the server with
+ * the provided credentials, sets access and refresh cookies upon successful login, and dispatches
+ * an action to retrieve user information.
+ *
+ * @param {Object} requestData - The data containing login credentials
+ * @param {Object} thunkAPI - The Redux thunk API object
+ * @returns {Promise<Object>} A Promise that resolves with the login response data
+ * @throws {Error} If an error occurs during the login process or if the login request fails
+ */
 export const login = createAsyncThunk("user/loginToAccount", async (requestData, thunkAPI) => {
     try {
         const credentials = await loginToAccount(requestData);
@@ -58,9 +83,18 @@ export const login = createAsyncThunk("user/loginToAccount", async (requestData,
     }
 });
 
+/**
+ * Asynchronous thunk action creator for checking user authentication. Dispatches an action to
+ * validate a user access token.
+ *
+ * @param {Object} thunkAPI - Redux thunk API object
+ * @returns {Promise<void>} A Promise that resolves once the authentication is complete
+ * @throws {Error} If an error occurs during verification process
+ */
+
 export const checkAuthentication = createAsyncThunk("user/verify", async (_, thunkAPI) => {
     try {
-        const response = await verifyUser();
+        const response = verifyUser();
         if (response === 200) {
             const { dispatch } = thunkAPI;
             dispatch(getUserInfo());
@@ -74,6 +108,14 @@ export const checkAuthentication = createAsyncThunk("user/verify", async (_, thu
     }
 });
 
+/**
+ * Asynchronous thunk action creator for user logout. Dispatches an action to reset the user state,
+ * logging the user out. The back-end API is also updated during this process
+ *
+ * @param {Object} thunkAPI - Redux thunk API object
+ * @returns {Promise<void>} A Promise that resolves once the logout process is completed
+ * @throws {Error} If an error occurs during the logout process
+ */
 export const logout = createAsyncThunk("user/logout", async (_, thunkAPI) => {
     try {
         const { dispatch } = thunkAPI;
@@ -84,6 +126,9 @@ export const logout = createAsyncThunk("user/logout", async (_, thunkAPI) => {
     }
 });
 
+/**
+ * Initial user account redux state
+ */
 const initialState = {
     isAuthenticated: false,
     user: null,
@@ -91,6 +136,11 @@ const initialState = {
     registered: false,
 };
 
+/**
+ * Initializes redux state of a user, and contains an object containing reducer functions. This
+ * generates action creators and action types that correspond to reduces and state. State
+ * variables are modified based on the outcomes of actions.
+ */
 const userSlice = createSlice({
     name: "user",
     initialState,

@@ -1,3 +1,9 @@
+/**
+ * NotFound.js
+ *
+ * Displays a "Not Found" page if an invalid URL is requested
+ */
+
 import React from "react";
 import { Container } from "react-bootstrap";
 

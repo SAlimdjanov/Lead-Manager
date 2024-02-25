@@ -4,6 +4,12 @@
  * Account registration route handler
  */
 
+/**
+ * Sends a POST request to the API to register a new user account
+ *
+ * @param {Object} data Object containing new user account credentials
+ * @returns {Number} HTTP response status code
+ */
 async function registerAccount(data) {
     try {
         const response = await fetch("/api/users/register", {
